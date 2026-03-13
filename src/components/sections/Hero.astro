@@ -1,0 +1,30 @@
+---
+import Button from '../ui/Button.astro';
+import headerVideo from '../../assets/hero/header-desktop.mp4';
+import headerImage from '../../assets/hero/hero-card-bg.png';
+---
+
+<section class="relative min-h-screen h-screen overflow-hidden pb-24 pt-36">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="absolute inset-0 w-full h-full object-cover"
+    aria-hidden="true"
+  >
+    <source src={headerVideo} type="video/mp4" />
+  </video>
+  <div class="container mx-auto h-full">
+    <div class="relative z-10 flex flex-col justify-center h-full py-16 px-6 text-white w-1/3 rounded-3xl"
+    style={{ backgroundImage: `url(${headerImage.src})` }}>
+      
+      <p class="uppercase">Full-cycle product team</p>
+      <h1>We Design & Build Digital Products from Scratch.</h1>
+      <p>
+        Got an idea for a product? We'll design it, build it, and launch it — all under one roof.
+      </p>
+      <Button href="/" text="Get Started" />
+    </div>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import astroLogo from '../assets/astro.svg';
 ---
 
 <!doctype html>
@@ -13,6 +14,44 @@ import '../styles/global.css';
 		<title>Astro Basics</title>
 	</head>
 	<body>
+		<nav class="container mx-auto absolute top-0 left-0 right-0 z-50 mt-6">
+			<div class="flex justify-between items-center">
+				<div class="bg-white rounded-full p-5">
+					<ul class="flex gap-6">
+						<li>
+							<a href="/">
+								<div class="flex items-center gap-4">
+									<img src={astroLogo.src} alt="Logo" width={50} height={20} />
+									<span>Agency</span>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="/">À propos</a>
+						</li>
+						<li>
+							<a href="/">Services</a>
+						</li>
+						<li>
+							<a href="/">Processus</a>
+						</li>
+						<li>
+							<a href="/">Projets</a>
+						</li>
+					</ul>
+				</div>
+				<div class="bg-white rounded-full">
+					<ul class="flex gap-4">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a href="/">About</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 		<slot />
 	</body>
 </html>
