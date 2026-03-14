@@ -1,0 +1,124 @@
+---
+import { Icon } from "astro-icon/components";
+const acutalYear = new Date().getFullYear();
+---
+
+<footer class="bg-black text-white">
+  <div class="container mx-auto px-7 pt-16 pb-8 lg:px-0">
+    <div class="flex flex-col gap-16 lg:flex-row lg:justify-between">
+      <div class="footer-left-inner flex max-w-xl flex-col gap-8">
+        <div class="flex flex-col gap-2">
+          <h2 class="font-urbanist text-4xl font-semibold md:text-5xl">
+            Sagency
+          </h2>
+          <p class="text-sm text-neutral-400">
+            Building digital products that shine.
+          </p>
+        </div>
+
+        <p class="text-base leading-relaxed text-neutral-300 md:text-lg">
+          We're a product development agency crafting web, mobile, and AI
+          experiences that move businesses forward.
+        </p>
+
+        <a
+          href="#contact"
+          class="inline-flex w-fit items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-black transition-colors duration-200 hover:bg-neutral-200 md:text-base"
+        >
+          <span>Démarrer votre projet</span>
+          <Icon name="iconamoon:arrow-top-right-1" class="h-4 w-4" />
+        </a>
+      </div>
+
+      <div class="footer-right-inner flex flex-col gap-8">
+        <a
+          href="mailto:contact@my-agency.io"
+          class="flex items-center gap-2 text-sm text-neutral-300 underline underline-offset-4 transition-colors duration-200 hover:text-white"
+        >
+          <Icon name="mdi:email-outline" class="h-4 w-4 shrink-0" />
+          contact@my-agency.io
+        </a>
+
+        <div class="flex gap-16">
+          <div class="flex flex-col gap-4">
+            <p class="text-xs tracking-widest text-neutral-500 uppercase">
+              Liens
+            </p>
+            <ul class="flex flex-col gap-3">
+              <li>
+                <a
+                  href="#about"
+                  class="inline-flex items-center gap-1.5 text-sm text-neutral-300 transition-colors duration-200 hover:text-white"
+                >
+                  À propos
+                  <Icon
+                    name="iconamoon:arrow-top-right-1"
+                    class="h-3.5 w-3.5"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#projects"
+                  class="inline-flex items-center gap-1.5 text-sm text-neutral-300 transition-colors duration-200 hover:text-white"
+                >
+                  Projets
+                  <Icon
+                    name="iconamoon:arrow-top-right-1"
+                    class="h-3.5 w-3.5"
+                  />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#contact"
+                  class="inline-flex items-center gap-1.5 text-sm text-neutral-300 transition-colors duration-200 hover:text-white"
+                >
+                  Réserver un appel
+                  <Icon
+                    name="iconamoon:arrow-top-right-1"
+                    class="h-3.5 w-3.5"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="flex flex-col gap-4">
+            <p class="text-xs tracking-widest text-neutral-500 uppercase">
+              Réseaux
+            </p>
+            <ul class="flex flex-col gap-3">
+              <li>
+                <a
+                  href="/"
+                  class="inline-flex items-center gap-1.5 text-sm text-neutral-300 transition-colors duration-200 hover:text-white"
+                >
+                  X
+                  <Icon
+                    name="iconamoon:arrow-top-right-1"
+                    class="h-3.5 w-3.5"
+                  />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="footer-bottom mt-16 flex flex-col gap-4 border-t border-neutral-800 pt-8 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="text-sm text-neutral-500">
+        © {acutalYear} My Agency. Tous droits réservés.
+      </p>
+      <a
+        href="/"
+        class="text-sm text-neutral-400 underline underline-offset-4 transition-colors duration-200 hover:text-white"
+      >
+        Mentions légales
+      </a>
+    </div>
+  </div>
+</footer>

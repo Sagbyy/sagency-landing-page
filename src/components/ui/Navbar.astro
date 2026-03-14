@@ -1,5 +1,5 @@
 ---
-import astroLogo from "../../assets/astro.svg";
+import sagencyLogo from "../../assets/sagency-logo.png";
 import { Icon } from "astro-icon/components";
 import Button from "./Button.astro";
 ---
@@ -13,7 +13,7 @@ import Button from "./Button.astro";
       class="nav-anim flex w-full items-center justify-between rounded-full border border-neutral-200 bg-white px-5 py-4 md:hidden"
     >
       <a href="/" class="flex items-center">
-        <img src={astroLogo.src} alt="Logo" width={50} height={20} />
+        <img src={sagencyLogo.src} alt="Logo" class="h-5 w-auto" />
       </a>
       <button
         type="button"
@@ -28,23 +28,23 @@ import Button from "./Button.astro";
     </div>
 
     <div class="nav-anim hidden w-full items-center justify-between md:flex">
-      <div class="rounded-full border border-neutral-200 bg-white p-5">
+      <div class="rounded-full border border-neutral-200 bg-white px-5">
         <ul class="flex gap-6">
           <li class="flex items-center justify-center">
             <a href="/">
-              <img src={astroLogo.src} alt="Logo" width={50} height={20} />
+              <img src={sagencyLogo.src} alt="Logo" class="h-7 w-auto" />
             </a>
           </li>
-          <li>
+          <li class="my-5">
             <a href="/">À propos</a>
           </li>
-          <li>
+          <li class="my-5">
             <a href="/">Services</a>
           </li>
-          <li>
+          <li class="my-5">
             <a href="/">Processus</a>
           </li>
-          <li>
+          <li class="my-5">
             <a href="/">Projets</a>
           </li>
         </ul>
