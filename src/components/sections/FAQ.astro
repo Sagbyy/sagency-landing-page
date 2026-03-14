@@ -34,7 +34,7 @@ const faqs = [
 
 <section id="faq" class="bg-[#F0F0F2] py-20 md:py-28">
   <div class="container mx-auto px-7 md:px-0">
-    <div class="mx-auto mb-12 flex max-w-3xl flex-col gap-4 text-center">
+    <div class="faq-header mx-auto mb-12 flex max-w-3xl flex-col gap-4 text-center">
       <p class="text-xl text-black">05</p>
       <p
         class="text-lg font-extralight tracking-[25%] text-black uppercase lg:text-xl"
@@ -55,7 +55,7 @@ const faqs = [
             name="faq"
             open={i === 0 ? true : undefined}
           >
-            <summary class="collapse-title min-h-0 px-6 py-5 text-base font-semibold md:text-lg">
+            <summary class="collapse-title min-h-0 py-5 pl-6 pr-16 text-base font-semibold md:text-lg">
               {faq.question}
             </summary>
             <div class="collapse-content px-6 pb-6">
@@ -68,7 +68,7 @@ const faqs = [
       }
     </div>
 
-    <div class="mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4">
+    <div class="faq-cta mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4">
       <div
         class="flex w-full items-center justify-between rounded-full px-2 py-2"
         style={{
@@ -101,3 +101,84 @@ const faqs = [
     </div>
   </div>
 </section>
+
+<style>
+  .faq-header,
+  .faq-item,
+  .faq-cta {
+    opacity: 0;
+  }
+
+  .faq-item.collapse-plus > summary::after {
+    top: 40%;
+    transform: translateY(-60%);
+    right: 1.5rem;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function init() {
+    const section = document.getElementById('faq');
+    if (!section) return;
+
+    gsap.fromTo(
+      section.querySelector('.faq-header'),
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    gsap.fromTo(
+      section.querySelectorAll('.faq-item'),
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section.querySelector('.faq-item'),
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    gsap.fromTo(
+      section.querySelector('.faq-cta'),
+      { opacity: 0, y: 24 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section.querySelector('.faq-cta'),
+          start: 'top 90%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+</script>
