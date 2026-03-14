@@ -9,7 +9,7 @@ import Button from "../ui/Button.astro";
       class="cta-card drop-shadow-cta relative w-full rounded-3xl bg-linear-to-r from-[#CC3EF9] to-[#FEB902] p-px"
     >
       <div
-        class="flex h-full w-full flex-col items-center justify-center gap-12 rounded-3xl bg-white px-6 py-10 sm:px-10 sm:py-14 md:px-20 md:py-24"
+        class="flex h-full w-full flex-col items-center justify-center gap-6 md:gap-12 rounded-3xl bg-white px-6 py-10 sm:px-10 sm:py-14 md:px-20 md:py-24"
         style={{
           backgroundImage: `url(${background.src})`,
           backgroundSize: "cover",
@@ -20,7 +20,7 @@ import Button from "../ui/Button.astro";
         <h2
           class="cta-anim font-urbanist text-center text-2xl font-bold text-black md:text-5xl"
         >
-          Ready to start working together with our team?
+          Prêt à construire votre projet avec nous ?
         </h2>
         <div class="cta-anim">
           <Button href="#contact" text="Commencer votre projet" color="black" />
@@ -44,17 +44,17 @@ import Button from "../ui/Button.astro";
 </style>
 
 <script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
   gsap.registerPlugin(ScrollTrigger);
 
   function initCtaAnimations() {
-    const section = document.getElementById('cta');
+    const section = document.getElementById("cta");
     if (!section) return;
 
-    const card = section.querySelector('.cta-card');
-    const items = section.querySelectorAll('.cta-anim');
+    const card = section.querySelector(".cta-card");
+    const items = section.querySelectorAll(".cta-anim");
 
     // Carte : scale up + fade in
     gsap.fromTo(
@@ -64,13 +64,13 @@ import Button from "../ui/Button.astro";
         opacity: 1,
         scale: 1,
         duration: 0.7,
-        ease: 'power3.out',
+        ease: "power3.out",
         scrollTrigger: {
           trigger: section,
-          start: 'top 80%',
-          toggleActions: 'play none none none',
+          start: "top 80%",
+          toggleActions: "play none none none",
         },
-      }
+      },
     );
 
     // Titre + bouton : fade + slide up en stagger
@@ -82,18 +82,18 @@ import Button from "../ui/Button.astro";
         y: 0,
         duration: 0.6,
         stagger: 0.15,
-        ease: 'power3.out',
+        ease: "power3.out",
         scrollTrigger: {
           trigger: section,
-          start: 'top 75%',
-          toggleActions: 'play none none none',
+          start: "top 75%",
+          toggleActions: "play none none none",
         },
-      }
+      },
     );
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initCtaAnimations);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCtaAnimations);
   } else {
     initCtaAnimations();
   }
