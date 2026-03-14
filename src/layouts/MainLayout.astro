@@ -6,9 +6,6 @@ import Navbar from "../components/ui/Navbar.astro";
 <!doctype html>
 <html lang="en">
   <head>
-    <script is:inline>
-      if (history.scrollRestoration) history.scrollRestoration = 'manual';
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -26,7 +23,7 @@ import Navbar from "../components/ui/Navbar.astro";
     <Navbar />
     <slot />
     <script>
-      window.scrollTo(0, 0);
+      //window.scrollTo(0, 0);
     </script>
   </body>
 </html>

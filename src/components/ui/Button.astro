@@ -14,7 +14,7 @@ const { href, text, color = "black", className } = Astro.props;
 <a
   href={href}
   class={cn(
-    "inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full w-fit transition-colors",
+    "inline-flex items-center text-sm md:text-base justify-center gap-2 px-7 py-3 rounded-full w-fit transition-colors",
     color === "black"
       ? "bg-black text-white hover:bg-neutral-950"
       : "bg-white text-black hover:bg-neutral-100",

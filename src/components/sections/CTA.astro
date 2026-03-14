@@ -1,0 +1,100 @@
+---
+import background from "../../assets/cta/background.svg";
+import Button from "../ui/Button.astro";
+---
+
+<section id="cta" class="py-20 md:py-28">
+  <div class="container mx-auto px-7 md:px-0">
+    <div
+      class="cta-card drop-shadow-cta relative w-full rounded-3xl bg-linear-to-r from-[#CC3EF9] to-[#FEB902] p-px"
+    >
+      <div
+        class="flex h-full w-full flex-col items-center justify-center gap-12 rounded-3xl bg-white px-6 py-10 sm:px-10 sm:py-14 md:px-20 md:py-24"
+        style={{
+          backgroundImage: `url(${background.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <h2
+          class="cta-anim font-urbanist text-center text-2xl font-bold text-black md:text-5xl"
+        >
+          Ready to start working together with our team?
+        </h2>
+        <div class="cta-anim">
+          <Button href="#contact" text="Commencer votre projet" color="black" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .drop-shadow-cta {
+    box-shadow: 0 0 40px -10px #ffd8ea;
+  }
+  .cta-card {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  .cta-anim {
+    opacity: 0;
+  }
+</style>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initCtaAnimations() {
+    const section = document.getElementById('cta');
+    if (!section) return;
+
+    const card = section.querySelector('.cta-card');
+    const items = section.querySelectorAll('.cta-anim');
+
+    // Carte : scale up + fade in
+    gsap.fromTo(
+      card,
+      { opacity: 0, scale: 0.96 },
+      {
+        opacity: 1,
+        scale: 1,
+        duration: 0.7,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    // Titre + bouton : fade + slide up en stagger
+    gsap.fromTo(
+      items,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCtaAnimations);
+  } else {
+    initCtaAnimations();
+  }
+</script>
