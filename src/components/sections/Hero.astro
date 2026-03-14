@@ -1,9 +1,8 @@
 ---
 import Button from '../ui/Button.astro';
-import headerVideo from '../../assets/hero/header-desktop.mp4';
+import headerVideoDesktop from '../../assets/hero/header-desktop.mp4';
+import headerVideoMobile from '../../assets/hero/header-mobile.mp4';
 import headerImage from '../../assets/hero/hero-card-bg.png';
-
-
 ---
 
 <section class="relative min-h-screen h-screen overflow-hidden pb-24 pt-36">
@@ -12,23 +11,36 @@ import headerImage from '../../assets/hero/hero-card-bg.png';
     muted
     loop
     playsinline
-    class="absolute inset-0 w-full h-full object-cover"
+    class="absolute inset-0 w-full h-full object-cover md:hidden"
     aria-hidden="true"
   >
-    <source src={headerVideo} type="video/mp4" />
+    <source src={headerVideoMobile} type="video/mp4" />
   </video>
-  <div class="container mx-auto h-full">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    class="absolute inset-0 w-full h-full object-cover hidden md:block"
+    aria-hidden="true"
+  >
+    <source src={headerVideoDesktop} type="video/mp4" />
+  </video>
+  <div class="container px-7 md:px-0 mx-auto h-full md:block flex flex-col justify-center items-center">
     <div
       id="hero-card"
-      class="relative z-10 flex flex-col gap-5 justify-center h-full p-16 text-white w-[550px] rounded-3xl"
+      class="relative z-10 flex flex-col gap-5 justify-center h-fit py-24 md:h-full p-6 md:p-16 text-white w-full md:w-[550px] rounded-3xl text-center md:text-left"
       style={{ backgroundImage: `url(${headerImage.src})`, backgroundPosition: '30%', backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
     >
-      <p class="hero-anim uppercase text-xl font-light">Full-cycle product team</p>
-      <h1 class="hero-anim text-5xl font-normal font-urbanist">We Design & Build Digital Products from Scratch.</h1>
-      <p class="hero-anim">Got an idea for a product? We'll design it, build it, and launch it — all under one roof.</p>
-      <div class="hero-anim">
+      <p class="hero-anim uppercase md:text-xl font-light text-center text-lg md:text-left">Full-cycle product team</p>
+      <h1 class="hero-anim text-4xl md:text-5xl font-normal font-urbanist text-center md:text-left">We Design & Build Digital Products from Scratch.</h1>
+      <p class="hero-anim text-center md:text-left text-sm md:text-base">Got an idea for a product? We'll design it, build it, and launch it — all under one roof.</p>
+      <div class="hero-anim text-center md:text-left hidden md:block">
         <Button href="/" text="Commencer votre projet" color="white" />
       </div>
+    </div>
+    <div class="hero-anim mt-auto w-full md:w-auto text-center md:text-left block md:hidden">
+      <Button href="/" text="Commencer votre projet" color="black" className="w-full" />
     </div>
   </div>
 </section>

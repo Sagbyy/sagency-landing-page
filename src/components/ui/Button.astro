@@ -5,14 +5,15 @@ interface Props {
   href: string;
   text: string;
   color: "white" | "black";
+  className?: string;
 }
 
-const { href, text, color = "black" } = Astro.props;
+const { href, text, color = "black", className } = Astro.props;
 ---
 
 <a
   href={href}
-  class={cn("inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full w-fit transition-colors", color === "black" ? "bg-black text-white hover:bg-neutral-950" : "bg-white text-black hover:bg-neutral-100")}
+  class={cn("inline-flex items-center justify-center gap-2 px-7 py-3 rounded-full w-fit transition-colors", color === "black" ? "bg-black text-white hover:bg-neutral-950" : "bg-white text-black hover:bg-neutral-100", className)}
 >
   <span>{text}</span>
   <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
