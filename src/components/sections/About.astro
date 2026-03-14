@@ -1,0 +1,156 @@
+---
+import Button from '../ui/Button.astro';
+import bgFirst from '../../assets/about/bg-first.png';
+import bgSecond from '../../assets/about/bg-second.png';
+import bgThird from '../../assets/about/bg-third.png';
+
+const cards = [
+  {
+    title: 'Conception Stratégique',
+    description:
+      "Nous cadrons vos besoins pour créer des outils qui font gagner du temps à vos équipes dès le premier jour.",
+    stat: '360+',
+    bg: bgFirst,
+  },
+  {
+    title: 'Expertise Technique',
+    description:
+      'Vos solutions sont développées par des experts certifiés, garantissant une architecture de pointe et une sécurité totale.',
+    stat: '360+',
+    bg: bgSecond,
+  },
+  {
+    title: 'Accompagnement Durable',
+    description:
+      "Nous assurons la maintenance et l'évolution de vos outils pour vous offrir une tranquillité d'esprit sur le long terme.",
+    stat: '360M',
+    bg: bgThird,
+  },
+];
+---
+
+<section id="about" class="py-20 md:py-28">
+  <div class="container mx-auto px-7 md:px-0">
+    <header class="max-w-2xl mb-12 md:mb-16 flex flex-col gap-4">
+      <p class="about-anim text-xl text-black">01</p>
+      <p class="about-anim text-lg lg:text-xl font-extralight uppercase tracking-[25%] text-black">[À PROPOS]</p>
+      <h2 class="about-anim font-urbanist text-4xl lg:text-5xl font-medium text-black leading-tight">
+        Votre partenaire expert en ingénierie informatique
+      </h2>
+      <p class="about-anim text-black text-base font-normal leading-relaxed">
+        Nous digitalisons vos processus par des projets sur mesure. Entre conseil et technologie, nous créons vos
+        leviers de croissance.
+      </p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6 mb-12 lg:mb-16 items-end">
+      {cards.map((card, i) => {
+        const sizeClasses = [
+          'min-h-[240px] lg:min-h-[280px]',
+          'min-h-[240px] lg:min-h-[370px]',
+          'min-h-[240px] lg:min-h-[460px]',
+        ][i];
+        return (
+        <article
+          class={`about-card relative rounded-2xl overflow-hidden ${sizeClasses} p-6 md:p-8 flex flex-col text-white`}
+          style={{
+            backgroundImage: `url(${card.bg.src})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          <div class="relative z-10 flex flex-col flex-1 w-full lg:w-4/5">
+            <h3 class="font-semibold text-lg md:text-2xl mb-4">{card.title}</h3>
+            <p class="text-white text-base leading-relaxed flex-1 font-extralight">{card.description}</p>
+          </div>
+            <p
+              class="mt-4 text-right text-5xl md:text-5xl font-urbanist font-bold text-white tracking-tight"
+              aria-hidden="true"
+            >
+              {card.stat}
+            </p>
+        </article>
+        );
+      })}
+    </div>
+
+    <div class="about-cta flex justify-center">
+      <Button href="#contact" text="Nous contacter" color="black" />
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initAboutAnimations() {
+    const section = document.getElementById('about');
+    if (!section) return;
+
+    const headerItems = section.querySelectorAll('.about-anim');
+    const cards = section.querySelectorAll('.about-card');
+    const cta = section.querySelector('.about-cta');
+
+    gsap.fromTo(
+      headerItems,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 60 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        stagger: 0.15,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: cards[0]?.parentElement ?? section,
+          start: 'top 80%',
+          toggleActions: 'play none none none',
+        },
+      }
+    );
+
+    if (cta) {
+      gsap.fromTo(
+        cta,
+        { opacity: 0, y: 24 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: cta,
+            start: 'top 90%',
+            toggleActions: 'play none none none',
+          },
+        }
+      );
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAboutAnimations);
+  } else {
+    initAboutAnimations();
+  }
+</script>
