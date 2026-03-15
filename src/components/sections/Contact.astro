@@ -65,6 +65,7 @@ const timelines = [
               <input
                 type="text"
                 name="name"
+                required
                 placeholder="Votre nom"
                 class="w-full bg-transparent text-sm text-black placeholder-neutral-400 outline-none"
               />
@@ -79,6 +80,7 @@ const timelines = [
               <input
                 type="email"
                 name="email"
+                required
                 placeholder="adresse@email.com"
                 class="w-full bg-transparent text-sm text-black placeholder-neutral-400 outline-none"
               />
@@ -89,7 +91,7 @@ const timelines = [
             rows="5"
             placeholder="Parlez-nous un peu de votre idée ou produit..."
             class="w-full resize-none rounded-2xl border border-neutral-200 px-4 py-3.5 text-sm text-black placeholder-neutral-400 transition-colors duration-200 outline-none focus:border-neutral-400"
-          ></textarea>
+            required></textarea>
         </div>
 
         <div class="flex flex-col gap-3">
@@ -147,11 +149,18 @@ const timelines = [
           </div>
         </div>
 
+        <div
+          id="form-feedback"
+          class="hidden rounded-2xl px-4 py-3.5 text-sm font-medium"
+        >
+        </div>
+
         <button
           type="submit"
-          class="flex w-full items-center justify-center gap-2 rounded-full bg-black px-8 py-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-neutral-800 md:text-base"
+          id="submit-btn"
+          class="flex w-full items-center justify-center gap-2 rounded-full bg-black px-8 py-4 text-sm font-semibold text-white transition-colors duration-200 hover:bg-neutral-800 disabled:cursor-not-allowed disabled:opacity-50 md:text-base"
         >
-          <span>Envoyer le message</span>
+          <span id="submit-label">Envoyer le message</span>
           <Icon name="iconamoon:arrow-top-right-1" class="h-4 w-4" />
         </button>
       </form>
@@ -185,7 +194,8 @@ const timelines = [
 
           <div class="flex flex-col gap-2">
             <a
-              href="#"
+              href="https://calendar.app.google/DjdkoBZLrgx344AF7"
+              target="_blank"
               class="flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-black transition-colors duration-200 hover:bg-neutral-100"
             >
               <span>Réserver un appel de 30 min</span>
@@ -203,7 +213,7 @@ const timelines = [
               Ou envoyez-nous un email
             </p>
             <a
-              href="mailto:contact@my-agency.io"
+              href="mailto:contact@sagency.tech"
               class="group flex items-center gap-3"
             >
               <div
@@ -214,7 +224,7 @@ const timelines = [
               <span
                 class="text-sm font-medium text-white underline underline-offset-4 transition-colors duration-200 group-hover:text-white/80"
               >
-                contact@my-agency.io
+                contact@sagency.tech
               </span>
             </a>
             <p class="text-xs text-white/60">
@@ -244,6 +254,7 @@ const timelines = [
 <script>
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { actions } from "astro:actions";
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -266,6 +277,78 @@ const timelines = [
           btn.classList.toggle("active");
         });
       });
+
+    const form = section.querySelector<HTMLFormElement>(".contact-form");
+    const submitBtn = section.querySelector<HTMLButtonElement>("#submit-btn");
+    const submitLabel = section.querySelector<HTMLSpanElement>("#submit-label");
+    const feedback = section.querySelector<HTMLDivElement>("#form-feedback");
+
+    form?.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+
+      const selectedNeeds = [
+        ...section.querySelectorAll<HTMLButtonElement>(
+          '.pill-toggle[data-group="needs"].active',
+        ),
+      ]
+        .map((b) => b.textContent?.trim())
+        .filter(Boolean)
+        .join(", ");
+
+      const selectedBudget = section
+        .querySelector<HTMLButtonElement>(
+          '.pill-toggle[data-group="budget"].active',
+        )
+        ?.textContent?.trim();
+
+      const selectedTimeline = section
+        .querySelector<HTMLButtonElement>(
+          '.pill-toggle[data-group="timeline"].active',
+        )
+        ?.textContent?.trim();
+
+      if (selectedNeeds) formData.set("needs", selectedNeeds);
+      if (selectedBudget) formData.set("budget", selectedBudget);
+      if (selectedTimeline) formData.set("timeline", selectedTimeline);
+
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitLabel) submitLabel.textContent = "Envoi en cours…";
+      if (feedback)
+        feedback.className =
+          "hidden rounded-2xl px-4 py-3.5 text-sm font-medium";
+
+      const { error } = await actions.send(formData);
+
+      if (error) {
+        if (feedback) {
+          let msg = "Une erreur est survenue. Veuillez réessayer.";
+          if (error.code === "INPUT_VALIDATION_ERROR" && error.fields) {
+            const first = Object.values(error.fields).flat()[0];
+            if (first) msg = first;
+          }
+          feedback.textContent = msg;
+          feedback.className =
+            "rounded-2xl bg-red-50 px-4 py-3.5 text-sm font-medium text-red-600 border border-red-200";
+        }
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = "Envoyer le message";
+      } else {
+        if (feedback) {
+          feedback.textContent =
+            "Message envoyé ! Nous vous répondons sous 1 jour ouvré.";
+          feedback.className =
+            "rounded-2xl bg-green-50 px-4 py-3.5 text-sm font-medium text-green-700 border border-green-200";
+        }
+        form.reset();
+        section
+          .querySelectorAll<HTMLButtonElement>(".pill-toggle")
+          .forEach((b) => b.classList.remove("active"));
+        if (submitBtn) submitBtn.disabled = false;
+        if (submitLabel) submitLabel.textContent = "Envoyer le message";
+      }
+    });
 
     gsap.fromTo(
       section.querySelector(".contact-header"),
