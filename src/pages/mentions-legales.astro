@@ -1,0 +1,364 @@
+---
+import { Icon } from "astro-icon/components";
+import MainLayout from "../layouts/MainLayout.astro";
+import Footer from "../components/sections/Footer.astro";
+import backgroundCard from "../assets/faq/background-card.png";
+---
+
+<MainLayout>
+  <main class="mx-auto max-w-4xl px-7 pt-40 pb-24 lg:px-0">
+    <div class="mb-16">
+      <a
+        href="/"
+        class="inline-flex items-center gap-2 text-sm text-neutral-500 transition-colors hover:text-black"
+      >
+        <Icon name="ri:arrow-left-line" class="h-4 w-4" />
+        Retour à l'accueil
+      </a>
+
+      <h1 class="font-urbanist mt-8 text-5xl font-semibold md:text-6xl">
+        Mentions légales
+      </h1>
+      <p class="mt-4 text-neutral-500">Dernière mise à jour : mars 2026</p>
+    </div>
+
+    <div class="flex flex-col gap-12">
+      <section>
+        <h2 class="font-urbanist mb-4 text-2xl font-semibold">
+          1. Éditeur du site
+        </h2>
+        <div class="rounded-2xl border border-neutral-200 p-6 text-neutral-700">
+          <p><strong>Raison sociale :</strong> Sagency</p>
+          <p class="mt-2">
+            <strong>Forme juridique :</strong> Micro-entreprise
+          </p>
+          <p class="mt-2"><strong>SIRET :</strong> 926 221 505 00015</p>
+          <p class="mt-2">
+            <strong>Siège social :</strong> 12 rue de la Paix, 75000 Paris
+          </p>
+          <p class="mt-2"><strong>Téléphone :</strong> +33 6 12 34 56 78</p>
+          <p class="mt-2">
+            <strong>E-mail :</strong>
+            <a
+              href="mailto:contact@sagency.tech"
+              class="text-black underline underline-offset-4 hover:text-neutral-600"
+            >
+              contact@sagency.tech
+            </a>
+          </p>
+          <p class="mt-2">
+            <strong>Directeur de la publication :</strong> Jérémy Daudin
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-urbanist mb-4 text-2xl font-semibold">2. Hébergeur</h2>
+        <div class="rounded-2xl border border-neutral-200 p-6 text-neutral-700">
+          <p>
+            <strong>Société :</strong> Railway
+          </p>
+          <p class="mt-2">
+            <strong>Adresse :</strong> 123 Rue de la Paix, 75000 Paris
+          </p>
+          <p class="mt-2">
+            <strong>Site web :</strong>
+            <a
+              href="https://railway.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-black underline underline-offset-4 hover:text-neutral-600"
+              >railway.com</a
+            >
+          </p>
+        </div>
+      </section>
+      <!-- Propriété intellectuelle -->
+      <section>
+        <h2 class="font-urbanist mb-4 text-2xl font-semibold">
+          3. Propriété intellectuelle
+        </h2>
+        <p class="leading-relaxed text-neutral-700">
+          L'ensemble des éléments constituant ce site (textes, graphismes,
+          logiciels, photographies, images, sons, plans, logos, marques, etc.)
+          est la propriété exclusive de Sagency ou de ses partenaires et est
+          protégé par les dispositions du Code de la propriété intellectuelle.
+        </p>
+        <p class="mt-4 leading-relaxed text-neutral-700">
+          Toute reproduction, représentation, modification, publication,
+          transmission, dénaturation, totale ou partielle du site ou de son
+          contenu, par quelque procédé que ce soit, et sur quelque support que
+          ce soit est interdite sans l'autorisation préalable et écrite de
+          Sagency.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-urbanist mb-4 text-2xl font-semibold">
+          4. Protection des données personnelles (RGPD)
+        </h2>
+
+        <div class="flex flex-col gap-6 text-neutral-700">
+          <div>
+            <h3 class="mb-2 font-semibold text-black">
+              4.1 Responsable du traitement
+            </h3>
+            <p class="leading-relaxed">
+              Le responsable du traitement des données personnelles collectées
+              sur ce site est Sagency, joignable à l'adresse : <a
+                href="mailto:contact@sagency.tech"
+                class="text-black underline underline-offset-4 hover:text-neutral-600"
+                >contact@sagency.tech</a
+              >.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="mb-2 font-semibold text-black">
+              4.2 Données collectées
+            </h3>
+            <p class="leading-relaxed">
+              Dans le cadre de l'utilisation de ce site, nous collectons les
+              données suivantes :
+            </p>
+            <ul class="mt-3 flex flex-col gap-2 pl-5">
+              <li class="list-disc">
+                <strong>Formulaire de contact :</strong> nom, adresse e-mail, numéro
+                et le contenu de votre message.
+              </li>
+              <li class="list-disc">
+                <strong>Données de navigation :</strong> adresse IP, type de navigateur,
+                pages visitées, durée des visites.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="mb-2 font-semibold text-black">
+              4.3 Finalités et base légale
+            </h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse text-sm">
+                <thead>
+                  <tr class="border-b border-neutral-200">
+                    <th class="py-3 pr-4 text-left font-semibold text-black"
+                      >Finalité</th
+                    >
+                    <th class="py-3 pr-4 text-left font-semibold text-black"
+                      >Base légale</th
+                    >
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-100">
+                  <tr>
+                    <td class="py-3 pr-4">Répondre aux demandes de contact</td>
+                    <td class="py-3">Intérêt légitime (Art. 6.1.f RGPD)</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 pr-4">Gestion des prospects et devis</td>
+                    <td class="py-3"
+                      >Exécution de mesures précontractuelles (Art. 6.1.b RGPD)</td
+                    >
+                  </tr>
+                  <tr>
+                    <td class="py-3 pr-4">Amélioration du site (analytics)</td>
+                    <td class="py-3">Consentement (Art. 6.1.a RGPD)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h3 class="mb-2 font-semibold text-black">
+              4.4 Durée de conservation
+            </h3>
+            <ul class="flex flex-col gap-2 pl-5">
+              <li class="list-disc">
+                Données de contact : 3 ans à compter du dernier contact.
+              </li>
+              <li class="list-disc">
+                Données de navigation : 13 mois maximum.
+              </li>
+              <li class="list-disc">
+                Données contractuelles : 5 ans à compter de la fin de la
+                relation contractuelle.
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 class="mb-2 font-semibold text-black">
+              4.5 Destinataires des données
+            </h3>
+            <p class="leading-relaxed">
+              Les données collectées sont destinées exclusivement à Sagency.
+              Elles ne sont ni vendues, ni louées, ni cédées à des tiers. Elles
+              peuvent être partagées avec des sous-traitants techniques
+              (hébergeur, outil d'e-mailing) dans le strict cadre de la
+              prestation, sous contrat de traitement de données conforme au
+              RGPD.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="mb-2 font-semibold text-black">4.6 Vos droits</h3>
+            <p class="leading-relaxed">
+              Conformément au Règlement (UE) 2016/679 (RGPD) et à la loi
+              Informatique et Libertés, vous disposez des droits suivants sur
+              vos données personnelles :
+            </p>
+            <ul class="mt-3 flex flex-col gap-2 pl-5">
+              <li class="list-disc">
+                <strong>Droit d'accès</strong> : obtenir une copie des données vous
+                concernant.
+              </li>
+              <li class="list-disc">
+                <strong>Droit de rectification</strong> : corriger des données inexactes
+                ou incomplètes.
+              </li>
+              <li class="list-disc">
+                <strong>Droit à l'effacement</strong> : demander la suppression de
+                vos données (« droit à l'oubli »).
+              </li>
+              <li class="list-disc">
+                <strong>Droit à la limitation</strong> : restreindre temporairement
+                le traitement de vos données.
+              </li>
+              <li class="list-disc">
+                <strong>Droit d'opposition</strong> : vous opposer au traitement de
+                vos données.
+              </li>
+              <li class="list-disc">
+                <strong>Droit à la portabilité</strong> : recevoir vos données dans
+                un format structuré et lisible par machine.
+              </li>
+            </ul>
+            <p class="mt-4 leading-relaxed">
+              Pour exercer ces droits, contactez-nous à <a
+                href="mailto:contact@sagency.tech"
+                class="text-black underline underline-offset-4 hover:text-neutral-600"
+                >contact@sagency.tech</a
+              >. En cas de réponse insatisfaisante, vous pouvez introduire une
+              réclamation auprès de la <strong>CNIL</strong> (Commission Nationale
+              de l'Informatique et des Libertés) : <a
+                href="https://www.cnil.fr"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-black underline underline-offset-4 hover:text-neutral-600"
+                >www.cnil.fr</a
+              >.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-urbanist mb-4 text-2xl font-semibold">
+          5. Politique de cookies
+        </h2>
+        <div class="flex flex-col gap-4 text-neutral-700">
+          <p class="leading-relaxed">
+            Un cookie est un petit fichier texte déposé sur votre terminal
+            (ordinateur, tablette, smartphone) lors de votre navigation. Les
+            cookies nous permettent de mesurer l'audience du site et d'améliorer
+            votre expérience.
+          </p>
+          <div>
+            <h3 class="mb-2 font-semibold text-black">Cookies utilisés</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse text-sm">
+                <thead>
+                  <tr class="border-b border-neutral-200">
+                    <th class="py-3 pr-4 text-left font-semibold text-black"
+                      >Type</th
+                    >
+                    <th class="py-3 pr-4 text-left font-semibold text-black"
+                      >Finalité</th
+                    >
+                    <th class="py-3 text-left font-semibold text-black"
+                      >Durée</th
+                    >
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-neutral-100">
+                  <tr>
+                    <td class="py-3 pr-4">Cookies techniques</td>
+                    <td class="py-3 pr-4">Fonctionnement du site</td>
+                    <td class="py-3">Session</td>
+                  </tr>
+                  <tr>
+                    <td class="py-3 pr-4">Cookies analytiques</td>
+                    <td class="py-3 pr-4">Mesure d'audience (si activés)</td>
+                    <td class="py-3">13 mois</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p class="leading-relaxed">
+            Vous pouvez à tout moment paramétrer votre navigateur pour refuser
+            ou supprimer les cookies. Cette démarche peut toutefois affecter
+            certaines fonctionnalités du site.
+          </p>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="font-urbanist mb-4 text-2xl font-semibold">
+          6. Limitation de responsabilité
+        </h2>
+        <p class="leading-relaxed text-neutral-700">
+          Sagency met tout en œuvre pour assurer l'exactitude et la mise à jour
+          des informations publiées sur ce site. Toutefois, Sagency ne peut
+          garantir l'exactitude, la précision ou l'exhaustivité des informations
+          mises à disposition. Sagency se réserve le droit de corriger, à tout
+          moment et sans préavis, le contenu de ce site.
+        </p>
+        <p class="mt-4 leading-relaxed text-neutral-700">
+          Sagency ne saurait être tenu responsable de l'utilisation faite de ces
+          informations, des éventuelles erreurs qu'elles pourraient contenir, ni
+          des dommages directs ou indirects qui pourraient résulter de l'accès
+          au site ou de son utilisation.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="font-urbanist mb-4 text-2xl font-semibold">
+          7. Droit applicable
+        </h2>
+        <p class="leading-relaxed text-neutral-700">
+          Le présent site et ses mentions légales sont soumis au droit français.
+          En cas de litige, et à défaut de résolution amiable, les tribunaux
+          français seront seuls compétents.
+        </p>
+      </section>
+
+      <section
+        class="rounded-2xl bg-black p-8 text-white"
+        style={{
+          backgroundImage: `url(${backgroundCard.src})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <h2 class="font-urbanist mb-3 text-2xl font-semibold">
+          Une question sur vos données ?
+        </h2>
+        <p class="leading-relaxed text-neutral-300">
+          Pour toute demande relative à vos données personnelles ou à l'exercice
+          de vos droits, contactez-nous directement.
+        </p>
+        <a
+          href="/#contact"
+          class="mt-5 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-neutral-200"
+        >
+          Nous contacter
+        </a>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</MainLayout>
