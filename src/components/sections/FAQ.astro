@@ -100,7 +100,7 @@ const faqs = [
       class="faq-cta mx-auto mt-10 flex max-w-3xl flex-col items-center gap-4"
     >
       <div
-        class="flex w-full items-center justify-between rounded-full px-2 py-2"
+        class="flex w-full flex-col justify-between gap-4 rounded-3xl p-4 md:flex-row md:items-center md:gap-0 md:rounded-full md:p-2"
         style={{
           backgroundImage: `url(${backgroundCard.src})`,
           backgroundSize: "100%",
@@ -118,7 +118,12 @@ const faqs = [
             >Une autre question ?</span
           >
         </div>
-        <Button href="#contact" text="Réserver un appel" color="white" />
+        <Button
+          href="#contact"
+          text="Réserver un appel"
+          color="white"
+          className="w-full md:w-auto"
+        />
       </div>
       <p class="text-sm text-gray-400">ou envoyez-nous un email à</p>
       <a
