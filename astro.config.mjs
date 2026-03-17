@@ -9,13 +9,15 @@ import icon from "astro-icon";
 
 import node from "@astrojs/node";
 
+import sitemap from "@astrojs/sitemap";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://sagency.tech",
   security: {
     checkOrigin: false,
   },
-  integrations: [react(), icon()],
+  integrations: [react(), icon(), sitemap()],
 
   vite: {
     plugins: [tailwindcss()],
