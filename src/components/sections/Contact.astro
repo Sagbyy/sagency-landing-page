@@ -55,43 +55,53 @@ const timelines = [
         <div class="flex flex-col gap-3">
           <p class="text-sm font-semibold text-black">Information</p>
           <div class="flex flex-col gap-3 sm:flex-row">
-            <label
-              class="flex flex-1 items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-3.5 transition-colors duration-200 focus-within:border-neutral-400"
-            >
-              <Icon
-                name="mdi:account-outline"
-                class="h-4 w-4 shrink-0 text-neutral-400"
-              />
-              <input
-                type="text"
-                name="name"
-                required
-                placeholder="Votre nom"
-                class="w-full bg-transparent text-sm text-black placeholder-neutral-400 outline-none"
-              />
-            </label>
-            <label
-              class="flex flex-1 items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-3.5 transition-colors duration-200 focus-within:border-neutral-400"
-            >
-              <Icon
-                name="mdi:email-outline"
-                class="h-4 w-4 shrink-0 text-neutral-400"
-              />
-              <input
-                type="email"
-                name="email"
-                required
-                placeholder="adresse@email.com"
-                class="w-full bg-transparent text-sm text-black placeholder-neutral-400 outline-none"
-              />
-            </label>
+            <div class="flex flex-1 flex-col gap-1">
+              <label
+                class="flex items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-3.5 transition-colors duration-200 focus-within:border-neutral-400"
+              >
+                <Icon
+                  name="mdi:account-outline"
+                  class="h-4 w-4 shrink-0 text-neutral-400"
+                />
+                <input
+                  type="text"
+                  name="name"
+                  required
+                  placeholder="Votre nom"
+                  class="w-full bg-transparent text-sm text-black placeholder-neutral-400 outline-none"
+                  id="input-name"
+                />
+              </label>
+              <p id="error-name" class="hidden text-xs text-red-500"></p>
+            </div>
+            <div class="flex flex-1 flex-col gap-1">
+              <label
+                class="flex items-center gap-3 rounded-2xl border border-neutral-200 px-4 py-3.5 transition-colors duration-200 focus-within:border-neutral-400"
+              >
+                <Icon
+                  name="mdi:email-outline"
+                  class="h-4 w-4 shrink-0 text-neutral-400"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  placeholder="adresse@email.com"
+                  class="w-full bg-transparent text-sm text-black placeholder-neutral-400 outline-none"
+                  id="input-email"
+                />
+              </label>
+              <p id="error-email" class="hidden text-xs text-red-500"></p>
+            </div>
           </div>
           <textarea
             name="message"
+            id="input-message"
             rows="5"
             placeholder="Parlez-nous un peu de votre idée ou produit..."
             class="w-full resize-none rounded-2xl border border-neutral-200 px-4 py-3.5 text-sm text-black placeholder-neutral-400 transition-colors duration-200 outline-none focus:border-neutral-400"
             required></textarea>
+          <p id="error-message" class="hidden -mt-1 text-xs text-red-500"></p>
         </div>
 
         <div class="flex flex-col gap-3">
@@ -254,7 +264,7 @@ const timelines = [
 <script>
   import gsap from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  import { actions } from "astro:actions";
+  import { actions, isInputError } from "astro:actions";
 
   gsap.registerPlugin(ScrollTrigger);
 
@@ -283,10 +293,73 @@ const timelines = [
     const submitLabel = section.querySelector<HTMLSpanElement>("#submit-label");
     const feedback = section.querySelector<HTMLDivElement>("#form-feedback");
 
+    const inputName = section.querySelector<HTMLInputElement>("#input-name");
+    const inputEmail = section.querySelector<HTMLInputElement>("#input-email");
+    const inputMessage = section.querySelector<HTMLTextAreaElement>("#input-message");
+    const errorName = section.querySelector<HTMLParagraphElement>("#error-name");
+    const errorEmail = section.querySelector<HTMLParagraphElement>("#error-email");
+    const errorMessage = section.querySelector<HTMLParagraphElement>("#error-message");
+
+    const fieldErrors: Record<string, { input: HTMLElement | null; el: HTMLParagraphElement | null; label: string }> = {
+      name: { input: inputName, el: errorName, label: "Le nom est requis" },
+      email: { input: inputEmail, el: errorEmail, label: "L'email est invalide" },
+      message: { input: inputMessage, el: errorMessage, label: "Le message est requis" },
+    };
+
+    function showFieldError(field: string, msg?: string) {
+      const f = fieldErrors[field];
+      if (!f) return;
+      f.input?.closest("label, textarea")?.classList.add("!border-red-400");
+      if (f.el) {
+        f.el.textContent = msg ?? f.label;
+        f.el.classList.remove("hidden");
+      }
+    }
+
+    function clearFieldErrors() {
+      Object.values(fieldErrors).forEach(({ input, el }) => {
+        input?.closest("label, textarea")?.classList.remove("!border-red-400");
+        if (el) { el.textContent = ""; el.classList.add("hidden"); }
+      });
+      // also clear border on textarea directly
+      inputMessage?.classList.remove("!border-red-400");
+    }
+
+    function validateClient(formData: FormData): boolean {
+      clearFieldErrors();
+      let valid = true;
+      const name = (formData.get("name") as string)?.trim();
+      const email = (formData.get("email") as string)?.trim();
+      const message = (formData.get("message") as string)?.trim();
+
+      if (!name) { showFieldError("name"); valid = false; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        showFieldError("email", !email ? "L'email est requis" : "L'email est invalide");
+        valid = false;
+      }
+      if (!message) { showFieldError("message"); valid = false; }
+      return valid;
+    }
+
+    // clear error on input
+    [inputName, inputEmail, inputMessage].forEach((el) => {
+      el?.addEventListener("input", () => {
+        const key = el.id.replace("input-", "");
+        if (key && fieldErrors[key]) {
+          fieldErrors[key].input?.closest("label, textarea")?.classList.remove("!border-red-400");
+          inputMessage?.classList.remove("!border-red-400");
+          const errEl = fieldErrors[key].el;
+          if (errEl) { errEl.textContent = ""; errEl.classList.add("hidden"); }
+        }
+      });
+    });
+
     form?.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       const formData = new FormData(form);
+
+      if (!validateClient(formData)) return;
 
       const selectedNeeds = [
         ...section.querySelectorAll<HTMLButtonElement>(
@@ -322,19 +395,30 @@ const timelines = [
       const { error } = await actions.send(formData);
 
       if (error) {
-        if (feedback) {
-          let msg = "Une erreur est survenue. Veuillez réessayer.";
-          if (error.code === "INPUT_VALIDATION_ERROR" && error.fields) {
-            const first = Object.values(error.fields).flat()[0];
-            if (first) msg = first;
+        if (isInputError(error)) {
+          clearFieldErrors();
+          let hasFieldError = false;
+          for (const [field, messages] of Object.entries(error.fields)) {
+            const msg = Array.isArray(messages) ? messages[0] : undefined;
+            if (msg && fieldErrors[field]) {
+              showFieldError(field, msg);
+              hasFieldError = true;
+            }
           }
-          feedback.textContent = msg;
+          if (!hasFieldError && feedback) {
+            feedback.textContent = "Veuillez vérifier les champs du formulaire.";
+            feedback.className =
+              "rounded-2xl bg-red-50 px-4 py-3.5 text-sm font-medium text-red-600 border border-red-200";
+          }
+        } else if (feedback) {
+          feedback.textContent = "Une erreur est survenue. Veuillez réessayer.";
           feedback.className =
             "rounded-2xl bg-red-50 px-4 py-3.5 text-sm font-medium text-red-600 border border-red-200";
         }
         if (submitBtn) submitBtn.disabled = false;
         if (submitLabel) submitLabel.textContent = "Envoyer le message";
       } else {
+        clearFieldErrors();
         if (feedback) {
           feedback.textContent =
             "Message envoyé ! Nous vous répondons sous 1 jour ouvré.";
