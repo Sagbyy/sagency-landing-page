@@ -44,14 +44,6 @@ export function Confirmation({ name }: Props) {
 
           <Section style={styles.body_section}>
 
-            <Img
-              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 24 24'%3E%3Cpath fill='%2321883D' d='M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m4.2 8.3l-4.8 4.8c-.4.4-1 .4-1.4 0l-2.2-2.2c-.4-.4-.4-1 0-1.4s1-.4 1.4 0l1.5 1.5l4.1-4.1c.4-.4 1-.4 1.4 0s.4 1 0 1.4'/%3E%3C/svg%3E"
-              width={64}
-              height={64}
-              alt="✓"
-              style={{ margin: "0 auto 24px", display: "block" }}
-            />
-
             <Text style={styles.title}>Votre message a bien été reçu</Text>
             <Text style={styles.description}>
               Nous avons bien reçu votre demande et nous vous répondrons{" "}
