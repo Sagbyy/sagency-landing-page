@@ -11,6 +11,10 @@ import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://sagency.tech",
+  security: {
+    checkOrigin: false,
+  },
   integrations: [react(), icon()],
 
   vite: {
