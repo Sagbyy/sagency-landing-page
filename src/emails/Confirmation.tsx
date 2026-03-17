@@ -33,25 +33,41 @@ export function Confirmation({ name }: Props) {
         `}</style>
       </Head>
       <Body style={styles.body}>
+        <Text style={styles.preheader}>
+          Nous avons bien reçu votre message et vous répondrons sous 1 jour ouvré.
+        </Text>
         <Container style={styles.container}>
-
           <Section style={styles.header}>
             <Text style={styles.headerLabel}>Sagency</Text>
-            <Img src={LOGO_WHITE} height={28} alt="Sagency" className="logo-white" style={{ display: "block", margin: "10px auto 16px" }} />
-            <Img src={LOGO_BLACK} height={28} alt="Sagency" className="logo-black" style={{ display: "none", margin: "10px auto 16px" }} />
+            <Img
+              src={LOGO_WHITE}
+              height={28}
+              alt="Sagency"
+              className="logo-white"
+              style={{ display: "block", margin: "10px auto 16px" }}
+            />
+            <Img
+              src={LOGO_BLACK}
+              height={28}
+              alt="Sagency"
+              className="logo-black"
+              style={{ display: "none", margin: "10px auto 16px" }}
+            />
             <Text style={styles.headerTitle}>Merci, {name} 👋</Text>
           </Section>
 
           <Section style={styles.body_section}>
-
             <Text style={styles.title}>Votre message a bien été reçu</Text>
             <Text style={styles.description}>
               Nous avons bien reçu votre demande et nous vous répondrons{" "}
-              <strong>sous 1 jour ouvré</strong>. En attendant, n'hésitez pas
-              à réserver un appel si vous souhaitez échanger plus rapidement.
+              <strong>sous 1 jour ouvré</strong>. En attendant, n'hésitez pas à
+              réserver un appel si vous souhaitez échanger plus rapidement.
             </Text>
 
-            <Button href="https://calendar.app.google/DjdkoBZLrgx344AF7" style={styles.cta}>
+            <Button
+              href="https://calendar.app.google/DjdkoBZLrgx344AF7"
+              style={styles.cta}
+            >
               Réserver un appel de 30 min
             </Button>
 
@@ -63,7 +79,6 @@ export function Confirmation({ name }: Props) {
             <Link href="mailto:contact@sagency.tech" style={styles.contactLink}>
               contact@sagency.tech
             </Link>
-
           </Section>
 
           <Section style={styles.footer}>
@@ -74,7 +89,6 @@ export function Confirmation({ name }: Props) {
               </Link>
             </Text>
           </Section>
-
         </Container>
       </Body>
     </Html>
@@ -168,5 +182,12 @@ const styles = {
     fontSize: 12,
     color: "#999",
     textAlign: "center" as const,
+  },
+  preheader: {
+    display: "none",
+    overflow: "hidden",
+    maxHeight: 0,
+    fontSize: 1,
+    color: "#f4f4f5",
   },
 };
