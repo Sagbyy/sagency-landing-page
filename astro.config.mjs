@@ -11,13 +11,15 @@ import node from "@astrojs/node";
 
 import sitemap from "@astrojs/sitemap";
 
+import robotsTxt from "astro-robots-txt";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://sagency.tech",
   security: {
     checkOrigin: false,
   },
-  integrations: [react(), icon(), sitemap()],
+  integrations: [react(), icon(), sitemap(), robotsTxt()],
 
   vite: {
     plugins: [tailwindcss()],

@@ -2,25 +2,91 @@
 import "../styles/global.css";
 import Navbar from "../components/ui/Navbar.astro";
 import { SEO } from "astro-seo";
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const SITE = "https://www.sagency.tech";
+const DEFAULT_TITLE = "Sagency — Agence de développement digital sur mesure";
+const DEFAULT_DESCRIPTION =
+  "Sagency conçoit et développe vos applications web, mobiles, IA, cloud et IoT. De la roadmap au déploiement, une équipe d'experts dédiée à votre produit.";
+const DEFAULT_OG_IMAGE = `${SITE}/og-image.png`;
+
+const {
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  canonical = SITE,
+  ogImage = DEFAULT_OG_IMAGE,
+  noindex = false,
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <SEO
-      title="Sagency"
-      description="Sagency est une agence de développement digital spécialisée dans la création de solutions sur mesure pour startups et entreprises. Nous concevons et développons des applications web, applications mobiles, solutions d'intelligence artificielle, systèmes cloud, objets connectés (IoT), infrastructures réseaux, back-office, et réalisons des audits cybersécurité. De la définition de votre roadmap jusqu'au déploiement en production, notre équipe d'experts prend en charge l'intégralité du cycle de vie de votre produit pour que vous restiez concentré sur votre vision."
-    />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/logo-sagency-black.ico" />
-    <link rel="icon" type="image/x-icon" href="/logo-sagency-black.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
+    <link rel="icon" type="image/x-icon" href="/logo-sagency-black.ico" />
+
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      noindex={noindex}
+      nofollow={noindex}
+      openGraph={{
+        basic: {
+          title: title,
+          type: "website",
+          image: ogImage,
+          url: canonical,
+        },
+        optional: {
+          description: description,
+          locale: "fr_FR",
+          siteName: "Sagency",
+        },
+        image: {
+          alt: "Sagency — Agence de développement digital",
+          width: 1200,
+          height: 630,
+        },
+      }}
+      twitter={{
+        card: "summary_large_image",
+        site: "@sagencytech",
+        title: title,
+        description: description,
+        image: ogImage,
+        imageAlt: "Sagency — Agence de développement digital",
+      }}
+      extend={{
+        meta: [
+          { name: "theme-color", content: "#000000" },
+          {
+            name: "keywords",
+            content:
+              "agence développement, application web, application mobile, intelligence artificielle, cloud, IoT, objets connectés, cybersécurité, blockchain, startup, sur mesure, France",
+          },
+          { name: "author", content: "Sagency" },
+          { name: "robots", content: noindex ? "noindex, nofollow" : "index, follow" },
+          { property: "og:image", content: `${SITE}/og-image-square.png` },
+        ],
+        link: [
+          { rel: "preconnect", href: "https://fonts.googleapis.com" },
+          { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: "" },
+          {
+            rel: "stylesheet",
+            href: "https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap",
+          },
+        ],
+      }}
     />
   </head>
   <body>

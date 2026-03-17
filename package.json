@@ -25,6 +25,7 @@
     "@tailwindcss/vite": "^4.2.1",
     "astro": "^6.0.4",
     "astro-icon": "^1.1.5",
+    "astro-robots-txt": "^1.0.0",
     "astro-seo": "^1.1.0",
     "daisyui": "^5.5.19",
     "gsap": "^3.14.2",
